@@ -7,9 +7,9 @@ const Root = () => {
 		<Canvas pixelRatio={0.75}>
 			<ambientLight />
 			<pointLight position={[10, 10, 10]} />
-			<Box position={[-1.2, 0, 0]} />
-			<Box position={[1.2, 2, 0]} />
-			<Box position={[2, -2, 3]} />
+			<Box position={[-2, 0, 1]} />
+			<Box position={[0, 0, 0]} />
+			<Box position={[2, 0, 3]} />
 		</Canvas>
 	)
 }
