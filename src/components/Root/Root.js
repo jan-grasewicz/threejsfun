@@ -9,9 +9,7 @@ const Root = () => {
 			<ambientLight />
 			<pointLight position={[10, 10, 10]} />
 			<Box position={[-2, 0, 1]} />
-			<Box position={[-4, 0, 0]} />
-			<Box position={[2, 0, 3]} />
-			<GroupMesh />
+			<GroupMesh position={[3, 0, -5]} />
 		</Canvas>
 	)
 }
