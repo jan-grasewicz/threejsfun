@@ -10,7 +10,7 @@ const BoxQuarter = ({ height = 3, spikeXPos = 1, ...rest }) => {
       // console.log('tst', props)
       const { geometry } = props
       geometry.vertices[0].x = spikeXPos
-      // geometry.verticesNeedUpdate = true
+      geometry.verticesNeedUpdate = true
       geometry.elementsNeedUpdate = true
       geometry.computeBoundingSphere()
       geometry.computeFaceNormals()
@@ -56,7 +56,7 @@ const TransformingBox = ({ ...rest }) => {
   const boxRef = useRef()
 
   useFrame(() => {
-    boxRef.current.rotation.y += 0.01
+    // boxRef.current.rotation.y += 0.01
   })
   // const spikeXPos = open ? -1 : 1
   const boxQuarterProps = { spikeXPos, height: 4 }
@@ -65,23 +65,17 @@ const TransformingBox = ({ ...rest }) => {
     setOpen((prev) => !prev)
   }
 
+  const AnimatedBoxQuarter = a(BoxQuarter)
   return (
-    <group ref={boxRef} onClick={handleClick} {...rest}>
-      <Spring to={{ spikeXPos: open ? -1 : 1 }}>
-        {(props) => (
-          <>
-            <a.group position-y={0.5} rotation-y={topRotation}>
-              <BoxQuarter spikeXPos={props.spikeXPos} />
-              {/* <BoxQuarter spikeXPos={props.spikeXPos} /> */}
-              <BoxQuarter spikeXPos={props.spikeXPos} rotation-y={Math.PI} />
-            </a.group>
-            <group rotation-x={Math.PI}>
-              <BoxQuarter spikeXPos={props.spikeXPos} />
-              <BoxQuarter spikeXPos={props.spikeXPos} rotation-y={Math.PI} />
-            </group>
-          </>
-        )}
-      </Spring>
+    <group ref={boxRef} onClick={handleClick} rotation-y={Math.PI / 4} {...rest}>
+      <a.group position-y={0.5} rotation-y={topRotation}>
+        <AnimatedBoxQuarter spikeXPos={spikeXPos} />
+        <AnimatedBoxQuarter spikeXPos={spikeXPos} rotation-y={Math.PI} />
+      </a.group>
+      <group rotation-x={Math.PI}>
+        <AnimatedBoxQuarter spikeXPos={spikeXPos} />
+        <AnimatedBoxQuarter spikeXPos={spikeXPos} rotation-y={Math.PI} />
+      </group>
     </group>
   )
 }
